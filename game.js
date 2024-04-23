@@ -3,7 +3,12 @@ const gameboard = {
 }
 
 const players = {
-    players: [],
+    playerx: {
+        team: 'x',
+    },
+    playero: {
+        team: 'o',
+    },
 }
 
 const gameFlow = {
@@ -17,13 +22,21 @@ const populateBoard = (function () {
         let rowCells = [];
         for(j=1; j<4; j++){
             let name = `${i}by${j}`
-            let cell = {name,
-            fill:'none'}
+            let cell = {name,fill:'none'}
             rowCells.push(cell)
         }
     gameboard.board.push(rowCells)
     }})();
 
+//Takes a specific cell and what player wants to fill the cell and then gives that cells object 
+//a fill value for that player either x or o.
 function fillCell(cell,player) {
-    let obj = gameboard.board.find()
+    if(player.team === 'x'){cell.fill = 'x'}
+    else{cell.fill = 'o'}
+}
+
+console.log(fillCell(gameboard.board[0][0], players.playero))
+
+function addPlayers() {
+    
 }
