@@ -11,8 +11,8 @@ const players = {
     },
 }
 
-const gameFlow = {
-    points: []
+const game = {
+    won: '',
 }
 
 //Populates board with 3by3 cells modeled as an array of arrays the first one modeling rows and the second
@@ -23,8 +23,7 @@ const populateBoard = (function () {
         for(j=1; j<4; j++){
             let name = `${i}by${j}`
             let cell = {name,fill:'none'}
-            rowCells.push(cell)
-        }
+            rowCells.push(cell)}
     gameboard.board.push(rowCells)
     }})();
 
@@ -32,11 +31,65 @@ const populateBoard = (function () {
 //a fill value for that player either x or o.
 function fillCell(cell,player) {
     if(player.team === 'x'){cell.fill = 'x'}
-    else{cell.fill = 'o'}
+    else{cell.fill = 'o'}}
+
+fillCell(gameboard.board[0][0], players.playerx)
+fillCell(gameboard.board[0][1],players.playerx)
+fillCell(gameboard.board[0][2], players.playerx)
+console.log(gameboard.board[0][0])
+
+//Should run the turns of the players when finished
+function runGame() {
+    let player = players.playerx;
+    while(true) {
+        // const turn = (function (){
+        //     return fillCell(choice,player) 
+        // })();
+        //Changes the player so that they can take turns choosing
+        if(player = players.playerx){player = players.playero}else{player = players.playerx};
+        //Checks if a player won then breaks if so 
+        if(game.won !== ''){break};
+    }}
+
+//should check if either x's or o's has diagonal, vertical or horizontal 3 in a row to call a won game
+function gameWon() {
+
 }
 
-console.log(fillCell(gameboard.board[0][0], players.playero))
+//Checks horizontal cells
+function checkHWin() {
+    let xcounter = [0,0,0];
+    let ocounter = [0,0,0];
+    let r = 0;
+    for(let row of gameboard.board){
+        for(let cell of row){
+            if(cell.fill === 'x'){xcounter[r]+=1}
+            else if(cell.fill === 'o'){ocounter[r]+=1}
+            else{continue}};
+        r++};
+    if(ocounter.includes(3)){game.won = 'o'}
+    if(xcounter.includes(3)){game.won = 'x'}};
 
-function addPlayers() {
-    
+//Checks vertical cells by going through each row and adding a counter for each column to count vertical
+function checkVWin(){
+    let xcounter = [0,0,0];
+    let ocounter = [0,0,0];
+    for(let row of gameboard.board){
+        if(row[0].fill === 'x'){xcounter[0] += 1}
+        if(row[0].fill === 'o'){ocounter[0] += 1}
+        if(row[1].fill === 'x'){xcounter[1] += 1}
+        if(row[1].fill === 'o'){ocounter[1] += 1}
+        if(row[2].fill === 'x'){xcounter[2] += 1}
+        if(row[2].fill === 'o'){ocounter[2] += 1}
+    }
+    console.log(xcounter,ocounter)
+    if(xcounter.includes(3)){game.won='x'}
+    else if(ocounter.includes(3)){game.won='o'}
 }
+
+
+checkHWin()
+
+checkVWin()
+
+console.log(game.won)
