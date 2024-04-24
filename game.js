@@ -33,9 +33,9 @@ function fillCell(cell,player) {
     if(player.team === 'x'){cell.fill = 'x'}
     else{cell.fill = 'o'}}
 
+fillCell(gameboard.board[0][0], players.playero)
+fillCell(gameboard.board[0][1], players.playero)
 fillCell(gameboard.board[0][2], players.playero)
-fillCell(gameboard.board[1][1], players.playero)
-fillCell(gameboard.board[2][0], players.playero)
 
 //Should run the turns of the players when finished
 function runGame() {
@@ -51,9 +51,11 @@ function runGame() {
     }}
 
 //should check if either x's or o's has diagonal, vertical or horizontal 3 in a row to call a won game
-function gameWon() {
-
-}
+const gameWon = (function () {
+    checkDWin();
+    checkHWin();
+    checkVWin();
+})();
 
 //Checks horizontal cells
 function checkHWin() {
@@ -85,6 +87,7 @@ function checkVWin(){
     else if(ocounter.includes(3)){game.won='o'}
 }
 
+//Checks for each team if they have a diagonal three in a row match
 function checkDWin(){
     let xcounterlr = 0;
     let ocounterlr = 0;
@@ -99,15 +102,8 @@ function checkDWin(){
             if(row[j].fill===team){if(team==='x'){xcounterrl++}else{ocounterrl++}};
             j--;
             i++;
-        }
-    })
+        }})
     if((xcounterlr===3)||(xcounterrl===3)){game.won ='x'}
     if((ocounterlr===3||(ocounterrl===3))){game.won = 'o'}}
-
-checkDWin()
-
-checkHWin()
-
-checkVWin()
 
 console.log(game.won)
