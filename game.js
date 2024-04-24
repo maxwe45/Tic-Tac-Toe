@@ -33,10 +33,9 @@ function fillCell(cell,player) {
     if(player.team === 'x'){cell.fill = 'x'}
     else{cell.fill = 'o'}}
 
-fillCell(gameboard.board[0][0], players.playerx)
-fillCell(gameboard.board[0][1],players.playerx)
-fillCell(gameboard.board[0][2], players.playerx)
-console.log(gameboard.board[0][0])
+fillCell(gameboard.board[0][2], players.playero)
+fillCell(gameboard.board[1][1], players.playero)
+fillCell(gameboard.board[2][0], players.playero)
 
 //Should run the turns of the players when finished
 function runGame() {
@@ -82,11 +81,30 @@ function checkVWin(){
         if(row[2].fill === 'x'){xcounter[2] += 1}
         if(row[2].fill === 'o'){ocounter[2] += 1}
     }
-    console.log(xcounter,ocounter)
     if(xcounter.includes(3)){game.won='x'}
     else if(ocounter.includes(3)){game.won='o'}
 }
 
+function checkDWin(){
+    let xcounterlr = 0;
+    let ocounterlr = 0;
+    let xcounterrl = 0;
+    let ocounterrl = 0;
+    let fills = ['x','o'];
+    fills.forEach(function findDiag(team) {
+        let j=2;
+        let i=0;
+        for(let row of gameboard.board){
+            if(row[i].fill===team){if(team==='x'){xcounterlr++}else{ocounterlr++}};
+            if(row[j].fill===team){if(team==='x'){xcounterrl++}else{ocounterrl++}};
+            j--;
+            i++;
+        }
+    })
+    if((xcounterlr===3)||(xcounterrl===3)){game.won ='x'}
+    if((ocounterlr===3||(ocounterrl===3))){game.won = 'o'}}
+
+checkDWin()
 
 checkHWin()
 
