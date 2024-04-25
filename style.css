@@ -1,0 +1,38 @@
+html {
+    margin-bottom: 0;
+    height:100%;
+}
+
+body {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.board {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 210px 210px 210px;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+
+.cell {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 1fr;
+    border: 2px solid slateblue;
+    display: grid;
+    grid-template-rows: 140px 25px;
+    grid-template-columns: 200px;
+    justify-items: center;
+    align-items: center;
+}
+
+.cellBttn {
+    grid-row: 2/3;
+    
+}

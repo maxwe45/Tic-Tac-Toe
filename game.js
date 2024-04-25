@@ -1,3 +1,7 @@
+const docBoard = document.querySelector('.board');
+
+let names = [];
+
 const gameboard = {
     board: [],
 }
@@ -21,34 +25,31 @@ const populateBoard = (function () {
     for(i=1; i<4; i++){
         let rowCells = [];
         for(j=1; j<4; j++){
-            let name = `${i}by${j}`
-            let cell = {name,fill:'none'}
-            rowCells.push(cell)}
+            let name = `${i}by${j}`;
+            names.push(name);
+            let cell = {name,fill:'--'}
+            rowCells.push(cell);
+            let cellEL = document.createElement('div');
+            docBoard.appendChild(cellEL)
+            cellEL.classList.add('cell')
+            cellEL.setAttribute('id',`${name}`)
+        }
     gameboard.board.push(rowCells)
     }})();
 
 //Takes a specific cell and what player wants to fill the cell and then gives that cells object 
 //a fill value for that player either x or o.
 function fillCell(cell,player) {
-    if(player.team === 'x'){cell.fill = 'x'}
-    else{cell.fill = 'o'}}
+    if(player.team === 'x'){
+        cell.fill = 'x';}
+    else{
+        cell.fill = 'o';
+}}
 
-fillCell(gameboard.board[0][0], players.playero)
-fillCell(gameboard.board[0][1], players.playero)
-fillCell(gameboard.board[0][2], players.playero)
+fillCell(gameboard.board[0][0],players.playerx)
+fillCell(gameboard.board[0][1],players.playerx)
+fillCell(gameboard.board[0][2],players.playerx)
 
-//Should run the turns of the players when finished
-function runGame() {
-    let player = players.playerx;
-    while(true) {
-        // const turn = (function (){
-        //     return fillCell(choice,player) 
-        // })();
-        //Changes the player so that they can take turns choosing
-        if(player = players.playerx){player = players.playero}else{player = players.playerx};
-        //Checks if a player won then breaks if so 
-        if(game.won !== ''){break};
-    }}
 
 //should check if either x's or o's has diagonal, vertical or horizontal 3 in a row to call a won game
 const gameWon = (function () {
@@ -106,4 +107,31 @@ function checkDWin(){
     if((xcounterlr===3)||(xcounterrl===3)){game.won ='x'}
     if((ocounterlr===3||(ocounterrl===3))){game.won = 'o'}}
 
+// should allow for the cell elements to be used to choose the cell for the player
+function runGame() {
+    let player = players.playerx;
+    while(true) {
+        for(let j of names){
+            let gridCell = document.getElementById(j);
+            let cellBttn = document.createElement('input');
+            let cellObj = gameboard.board.filter(row=>{
+                for(let i=0;i<3;i++){
+                    if(row[i].name === j){return true}
+                }
+            })
+            cellBttn.type = 'button';
+            cellBttn.value = 'Fill space'
+            gridCell.appendChild(cellBttn)
+            cellBttn.classList.add('cellBttn')
+            cellBttn.addEventListener('click', fillCell(cellObj,player))
+        }
+
+        //Changes the player so that they can take turns choosing
+        if(player = players.playerx){player = players.playero}else{player = players.playerx};
+        //Checks if a player won then breaks if so 
+        if(game.won !== ''){break};
+    }}
+
+
+runGame()
 console.log(game.won)
