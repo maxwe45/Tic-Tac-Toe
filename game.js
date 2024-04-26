@@ -25,6 +25,7 @@ const populateBoard = (function () {
     for(i=1; i<4; i++){
         let rowCells = [];
         for(j=1; j<4; j++){
+            let cellText = document.createElement('p');
             let name = `${i}by${j}`;
             names.push(name);
             let cell = {name,fill:'--'}
@@ -32,6 +33,9 @@ const populateBoard = (function () {
             let cellEL = document.createElement('div');
             docBoard.appendChild(cellEL)
             cellEL.classList.add('cell')
+            cellText.textContent = cell.fill;
+            cellEL.appendChild(cellText)
+            cellText.classList.add('cellText')
             cellEL.setAttribute('id',`${name}`)
         }
     gameboard.board.push(rowCells)
@@ -41,14 +45,13 @@ const populateBoard = (function () {
 //a fill value for that player either x or o.
 function fillCell(cell,player) {
     if(player.team === 'x'){
-        cell.fill = 'x';}
+        cell.fill = 'x';
+    }
     else{
         cell.fill = 'o';
 }}
 
-fillCell(gameboard.board[0][0],players.playerx)
-fillCell(gameboard.board[0][1],players.playerx)
-fillCell(gameboard.board[0][2],players.playerx)
+
 
 
 //should check if either x's or o's has diagonal, vertical or horizontal 3 in a row to call a won game
@@ -109,29 +112,35 @@ function checkDWin(){
 
 // should allow for the cell elements to be used to choose the cell for the player
 function runGame() {
-    let player = players.playerx;
-    while(true) {
+    let turn = 0;
+    let player = players.playerx
         for(let j of names){
             let gridCell = document.getElementById(j);
             let cellBttn = document.createElement('input');
-            let cellObj = gameboard.board.filter(row=>{
+            let cellObj = gameboard.board.find(row=>{
                 for(let i=0;i<3;i++){
                     if(row[i].name === j){return true}
                 }
             })
+            let cellText = gridCell.querySelector('.cellText')
+            
             cellBttn.type = 'button';
             cellBttn.value = 'Fill space'
             gridCell.appendChild(cellBttn)
             cellBttn.classList.add('cellBttn')
-            cellBttn.addEventListener('click', fillCell(cellObj,player))
-        }
+            cellBttn.addEventListener('click', ()=> {
+                fillCell(cellObj,player)
+                cellText.textContent = player.team})
+        
 
         //Changes the player so that they can take turns choosing
-        if(player = players.playerx){player = players.playero}else{player = players.playerx};
+        if(turn === 0){player = players.playero;
+        turn++}else{player=players.playerx;
+        turn--}
         //Checks if a player won then breaks if so 
         if(game.won !== ''){break};
     }}
 
-
 runGame()
+
 console.log(game.won)
