@@ -11,28 +11,19 @@ body {
     align-items: center;
 }
 
-.board {
-    display: grid;
+.container {
+    display:grid;
     justify-content: center;
-    align-items: center;
-    grid-template-columns: 210px 210px 210px;
-    grid-template-rows: 1fr 1fr 1fr;
-    column-gap: 0px;
 }
 
-.cell {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 1fr;
-    border: 2px solid slateblue;
-    display: grid;
-    grid-template-rows: 140px 25px;
-    grid-template-columns: 200px;
-    justify-items: center;
-    align-items: center;
+.board {
+    background-color: #000;
+    table-layout: fixed;
 }
 
-.cellBttn {
-    grid-row: 2/3;
-    
+.board td {
+    background-color: antiquewhite;
+    padding:40px;
+    width: 12px;
+    height: 20px;
 }
