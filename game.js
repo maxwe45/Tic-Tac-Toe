@@ -1,15 +1,36 @@
 const docBoard = document.querySelector('.board');
-let container = document.querySelector('.container')
+const container = document.querySelector('.container');
+const showUsers = document.querySelector('#showUsernames');
+const startGame = document.querySelector('.startGame')
+const modalContainer = document.querySelector('.modalContainer');
 
 let players =(name, mark) => {
-    return{name,mark}
+    let wins = 0;
+    let addWin = () => {return wins++}
+    let allWins = () => {return wins}
+    return{name,mark,addWin,allWins}
 }
 
-const gameboard =( ()=>{
+showUsers.addEventListener('click', () => {
+    modalContainer.classList.toggle('showModal')
+})
+
+startGame.addEventListener('click', ()=>{
+    gameboard();
+    startGame.classList.toggle('startGame');
+    startGame.classList.toggle('startRunning');
+    if(startGame.className === 'startRunning'){
+        return startGame.value = 'Restart'
+    }
+    else{
+        return startGame.value ='Start'
+}})
+
+const gameboard = ()=>{
     let board = ['','','','','','','','',''];
     let cellsPlayed = [];
-    let playerOne = players('Player 1', 'x');
-    let playerTwo = players('Player 2', 'o');
+    let playerOne = players('Player 1', 'X');
+    let playerTwo = players('Player 2', 'O');
     let player = playerOne
     let cell = document.querySelectorAll('.cell')
 
@@ -29,24 +50,24 @@ const gameboard =( ()=>{
 
     let checkWinner = () => {
         if(
-            (board[0]==='x' && board[1]==='x' && board[2]==='x')||
-            (board[3]==='x' && board[4]==='x' && board[5]==='x')||
-            (board[6]==='x' && board[7]==='x' && board[8]==='x')||
-            (board[0]==='x' && board[3]==='x' && board[6]==='x')||
-            (board[1]==='x' && board[4]==='x' && board[7]==='x')||
-            (board[2]==='x' && board[5]==='x' && board[8]==='x')||
-            (board[0]==='x' && board[4]==='x' && board[8]==='x')||
-            (board[2]==='x' && board[4]==='x' && board[6]==='x')
+            (board[0]==='X' && board[1]==='X' && board[2]==='X')||
+            (board[3]==='X' && board[4]==='X' && board[5]==='X')||
+            (board[6]==='X' && board[7]==='X' && board[8]==='X')||
+            (board[0]==='X' && board[3]==='X' && board[6]==='X')||
+            (board[1]==='X' && board[4]==='X' && board[7]==='X')||
+            (board[2]==='X' && board[5]==='X' && board[8]==='X')||
+            (board[0]==='X' && board[4]==='X' && board[8]==='X')||
+            (board[2]==='X' && board[4]==='X' && board[6]==='X')
         ){return true,player}
         else if(
-            (board[0]==='o' && board[1]==='o' && board[2]==='o')||
-            (board[3]==='o' && board[4]==='o' && board[5]==='o')||
-            (board[6]==='o' && board[7]==='o' && board[8]==='o')||
-            (board[0]==='o' && board[3]==='o' && board[6]==='o')||
-            (board[1]==='o' && board[4]==='o' && board[7]==='o')||
-            (board[2]==='o' && board[5]==='o' && board[8]==='o')||
-            (board[0]==='o' && board[4]==='o' && board[8]==='o')||
-            (board[2]==='o' && board[4]==='o' && board[6]==='o')
+            (board[0]==='O' && board[1]==='O' && board[2]==='O')||
+            (board[3]==='O' && board[4]==='O' && board[5]==='O')||
+            (board[6]==='O' && board[7]==='O' && board[8]==='O')||
+            (board[0]==='O' && board[3]==='O' && board[6]==='O')||
+            (board[1]==='O' && board[4]==='O' && board[7]==='O')||
+            (board[2]==='O' && board[5]==='O' && board[8]==='O')||
+            (board[0]==='O' && board[4]==='O' && board[8]==='O')||
+            (board[2]==='O' && board[4]==='O' && board[6]==='O')
         ){return true,player}
         }  
     
@@ -61,4 +82,4 @@ const gameboard =( ()=>{
             setTimeout(newRound,1000)
          }
         }
-})();
+};

@@ -8,7 +8,21 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
+    <div class="modalContainer">
+    <div class="modal">
+            <p class="usernameHeader">Edit player names:</p>
+            <label for="playerOne" id="oneLabel">X</label>
+            <input type="text" id="playerOneName" name="playerOne" placeholder="Player 1">
+            <label for="playerTwo" id="twoLabel">O</label>
+            <input type="text" id="playerTwoName" name="playerTwo" placeholder="Player 2">
+            <div class="usernameBttns">
+            <input type="button" id="userClose" value="Close">
+            <input type="button" id="submitNames" value="Done"></div>
+    </div></div>
     <div class="container">
+        <div class="gameBttns">
+        <input type="button" id="showUsernames" value="Edit Players">
+        <input type="button" class="startGame" value="Start"></div>
         <table class="board">
             <tr>
                 <td id="0" class="cell"></td>
