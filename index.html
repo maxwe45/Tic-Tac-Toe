@@ -11,10 +11,10 @@
     <div class="modalContainer">
     <div class="modal">
             <p class="usernameHeader">Edit player names:</p>
-            <label for="playerOne" id="oneLabel">X</label>
-            <input type="text" id="playerOneName" name="playerOne" placeholder="Player 1">
-            <label for="playerTwo" id="twoLabel">O</label>
-            <input type="text" id="playerTwoName" name="playerTwo" placeholder="Player 2">
+            <label for="playerOneName" id="oneLabel">X</label>
+            <input type="text" id="playerOneName" name="playerOneName" placeholder="Player 1">
+            <label for="playerTwoName" id="twoLabel">O</label>
+            <input type="text" id="playerTwoName" name="playerTwoName" placeholder="Player 2">
             <div class="usernameBttns">
             <input type="button" id="userClose" value="Close">
             <input type="button" id="submitNames" value="Done"></div>
@@ -22,7 +22,8 @@
     <div class="container">
         <div class="gameBttns">
         <input type="button" id="showUsernames" value="Edit Players">
-        <input type="button" class="startGame" value="Start"></div>
+        <input type="button" id="startGame" value="Start">
+        <input type="button" id="restartGame" value="Restart"> </div>
         <table class="board">
             <tr>
                 <td id="0" class="cell"></td>
@@ -41,7 +42,19 @@
             </tr>
         </table>
     </div>
-    
+    <div class="playerDisplay">
+            <table>
+                <tr>
+                    <td id="plyrOneWinsName">Player 1:</td>
+                    <td id="plyrOneWins">0</td>
+                </tr>
+                <tr>
+                    <td id="plyrTwoWinsName">Player 2:</td>
+                    <td id="plyrTwoWins">0</td>
+                </tr>
+            </table>
+            <div class="playerWon"></div>
+        </div>
 </body>
 <script src="game.js"></script>
 </html>

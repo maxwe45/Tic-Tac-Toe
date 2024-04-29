@@ -9,7 +9,7 @@ body {
     margin-top:0;
     margin-bottom: 0;
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 320px 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
 }
@@ -18,8 +18,17 @@ body {
     background-color: greenyellow;
 }
 
-.startGame {
-    background-color: #d2b2b0;
+#restartGame {
+    background-color: #ce5353;
+    visibility: hidden;
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+
+#startGame {
+    background-color: #4f6e5a;
+    grid-row: 1/2;
+    grid-column: 2/3;
 }
 
 .container {
@@ -37,9 +46,8 @@ body {
 
 #showUsernames {
     grid-column: 1/2;
-}
-#startGame {
-    grid-column: 2/3;
+    grid-row: 1/2;
+    background-color: #bd9f8d;
 }
 
 .board {
@@ -71,13 +79,17 @@ body {
     background-color: #8bcabe;
     justify-self: center;
     display: grid;
-    grid-template-columns: 30px 350px;
+    grid-template-columns: 30px 330px;
     grid-template-rows: 60px 50px 50px 50px;
     border: 2px solid #7c67f9;
     border-radius: 5px;
-
 }
 
+.playerDisplay{
+    border:2px solid whitesmoke;
+    background-color: #8bcabe;
+    border-radius: 5px;
+}
 
 .usernameBttns {
     grid-row: 4/5;
